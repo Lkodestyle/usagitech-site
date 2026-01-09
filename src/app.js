@@ -9,6 +9,7 @@ import initScrollAnimations from './scrollAnimations';
 import { initModal } from './modal';
 import initScrollNavegation from './scrollNavegation';
 import initSectionDetection from './sectionDetection';
+import initContactForm from './contactForm';
 
 export default function app(){
     initFaqAccordion();
@@ -21,4 +22,5 @@ export default function app(){
     initScrollAnimations();
     initScrollNavegation();
     initSectionDetection();
+    initContactForm();
 }
