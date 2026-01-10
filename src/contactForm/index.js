@@ -42,7 +42,7 @@ function showToast(status, message) {
 
 const len = (value) => (value ?? '').length;
 
-function validateName(name){
+export function validateName(name){
     // Name    string `json:"name" validate:"required,min=2,max=100"`
     if(!name){
         return 'Por favor, ingresá tu nombre.'
@@ -58,7 +58,8 @@ function validateName(name){
 
     return ''
 }
-function validateEmail(email) {
+
+export function validateEmail(email) {
     // Email   string `json:"email" validate:"required,email,max=254"`
     
     if (!email){
@@ -77,7 +78,7 @@ function validateEmail(email) {
     return ''
 }
 
-function validateMessage(message){
+export function validateMessage(message){
     // Message string `json:"message" validate:"required,min=10,max=2000"`
 
     if (!message) {
@@ -95,7 +96,7 @@ function validateMessage(message){
     return ''
 }
 
-function validateToken(token){
+export function validateToken(token){
     // Token   string `json:"token" validate:"required,max=2048"`
     if (!token) {
         return 'Por favor, confirmá que sos humano.'
@@ -106,7 +107,8 @@ function validateToken(token){
     }
     return ''
 }
-function validateCompany(company){
+
+export function validateCompany(company){
     // Company string `json:"company" validate:"max=100"`
     if (len(company) > 100) {
         return 'Empresa : longitud máxima de 100 caracteres.'
@@ -114,7 +116,8 @@ function validateCompany(company){
 
     return ''
 }
-function validateService(service){
+
+export function validateService(service){
     // Theme   string `json:"theme" validate:"max=50"`
     if( len(service) > 50){
         return 'Servicio inválido.'

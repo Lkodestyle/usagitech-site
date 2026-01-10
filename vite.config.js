@@ -6,4 +6,7 @@ export default defineConfig({
   // https://<usuario>.github.io/usagitech-site/
   // La base debe ser "/usagitech-site/" para que los assets resuelvan bien.
   base: '/usagitech-site/',
+  test: {
+    environment: 'jsdom',
+  },
 })
