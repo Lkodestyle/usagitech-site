@@ -24,14 +24,14 @@
     <link rel="stylesheet" href="css/styles.css">
     
     <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="./public/logo.png">
+    <link rel="icon" type="image/svg+xml" href="/logo.png">
 </head>
 <body>
     <!-- Header -->
     <header class="header" id="header">
         <div class="container header__container">
             <a href="#inicio" class="logo" data-nav="inicio">
-                <img class="logo__icon" src="./public/logo.png" alt="">
+                <img class="logo__icon" src="/logo.png" alt="">
                 <span class="logo__text">Usagitech</span>
             </a>
             
@@ -742,11 +742,11 @@
                     <form class="contact__form" id="contactForm">
                         <div class="form__group">
                             <label for="name" class="form__label">Nombre *</label>
-                            <input type="text" id="name" name="name" class="form__input" required>
+                            <input type="text" id="name" name="name" class="form__input">
                         </div>
                         <div class="form__group">
                             <label for="email" class="form__label">Email *</label>
-                            <input type="email" id="email" name="email" class="form__input" required>
+                            <input type="text" id="email" name="email" class="form__input">
                         </div>
                         <div class="form__group">
                             <label for="company" class="form__label">Empresa</label>
@@ -766,8 +766,16 @@
                         </div>
                         <div class="form__group">
                             <label for="message" class="form__label">Mensaje *</label>
-                            <textarea id="message" name="message" class="form__textarea" rows="4" required placeholder="Contanos brevemente sobre tu proyecto o desafío..."></textarea>
+                            <textarea id="message" name="message" class="form__textarea" rows="4" placeholder="Contanos brevemente sobre tu proyecto o desafío..."></textarea>
                         </div>
+
+                        <div
+                            class="cf-turnstile"
+                            data-sitekey="0x4AAAAAACLp2i1wJihyfk_G"
+                            data-theme="dark"
+                            data-size="normal"
+                            data-callback="onSuccessTurnstile"
+                        ></div>
                         <button type="submit" class="btn btn--primary btn--full">
                             Enviar mensaje
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1126,14 +1134,19 @@
     <!-- Toast notification -->
     <div class="toast" id="toast">
         <div class="toast__content">
-            <svg class="toast__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-                <polyline points="22 4 12 14.01 9 11.01"/>
-            </svg>
+            <section class="toast__icon__wrapper"></section>
             <span class="toast__message"></span>
         </div>
     </div>
 
     <script type="module" src="/src/main.js"></script>
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+    <script>
+        window.turnstileToken = null; 
+
+        window.onSuccessTurnstile = function(token) {
+            window.turnstileToken = token;
+        };
+    </script>
 </body>
 </html>
