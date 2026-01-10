@@ -40,6 +40,8 @@ function showToast(status, message) {
 
 }
 
+const len = (value) => (value ?? '').length;
+
 function validateName(name){
     // Name    string `json:"name" validate:"required,min=2,max=100"`
     if(!name){
@@ -87,7 +89,7 @@ function validateMessage(message){
     if (messageLen < 10) {
         return 'Mensaje: longitud mínima de 10 caracteres.'
     }
-    if (messageLen < 2000) {
+    if (messageLen > 2000) {
         return 'Mensaje: longitud máxima de 2000 caracteres.'
     }
     return ''

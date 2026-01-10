@@ -3,7 +3,7 @@
 // ============================================
 
 import { smoothScrollTo } from "../scrollNavegation";
-import updateActiveNavLink from "../sectionDetection";
+import { updateActiveNavLink } from "../sectionDetection";
 
 export default function initHandleBrowserBackForward(){
     window.addEventListener('popstate', () => {

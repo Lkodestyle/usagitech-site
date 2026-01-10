@@ -1,175 +1,354 @@
 # Usagitech - Website Corporativo IT
 
-Website SPA profesional para consultora IT. HTML, CSS y JavaScript vanilla - simple, rápido y fácil de hostear.
+Website SPA profesional para consultora IT boutique especializada en DevOps, Cloud y Desarrollo de Software.
 
-## 📁 Estructura
-
-```
-website/
-├── index.html          # Página principal (SPA)
-├── css/
-│   └── styles.css      # Estilos completos
-├── js/
-│   └── app.js          # Funcionalidad JS
-└── assets/             # Imágenes y recursos (agregar)
-```
-
-## 🚀 Deployment
-
-### Opción 1: S3 + CloudFront (Recomendado)
+## Inicio Rapido
 
 ```bash
-# 1. Crear bucket S3
-aws s3 mb s3://usagitech-site --region us-east-1
+# Instalar dependencias
+npm install
 
-# 2. Habilitar hosting estático
-aws s3 website s3://usagitech-site \
-  --index-document index.html \
-  --error-document index.html
+# Iniciar servidor de desarrollo
+npm run dev
 
-# 3. Subir archivos
-aws s3 sync . s3://usagitech-site \
-  --exclude ".git/*" \
-  --exclude "README.md" \
-  --cache-control "max-age=31536000" \
-  --content-type "text/html" \
-  --exclude "*" --include "*.html"
+# Construir para produccion
+npm run build
 
-aws s3 sync . s3://usagitech-site \
-  --exclude ".git/*" \
-  --exclude "README.md" \
-  --cache-control "max-age=31536000"
-
-# 4. Configurar CloudFront (opcional pero recomendado para HTTPS y cache)
-# Crear distribución apuntando al bucket S3
+# Preview del build
+npm run preview
 ```
 
-### Opción 2: GitHub Pages (Gratis)
+El sitio estara disponible en `http://localhost:5173`
 
-1. Crear repositorio en GitHub
-2. Subir archivos
-3. Ir a Settings → Pages → Source: main branch
-4. Listo, disponible en `https://usuario.github.io/repo`
+---
 
-### Opción 3: Vercel / Netlify (Gratis)
+## Stack Tecnologico
 
-1. Conectar repositorio
-2. Deploy automático
-3. Dominio personalizado gratis
+| Tecnologia | Version | Uso |
+|------------|---------|-----|
+| Vite (Rolldown) | 7.2.5 | Bundler y dev server |
+| JavaScript | ES6+ | Vanilla JS modular |
+| CSS3 | - | Variables CSS, Flexbox, Grid |
+| HTML5 | - | Semantico |
 
-## ⚙️ Personalización
+**Sin frameworks ni dependencias de runtime** - Solo Vite como dev dependency.
 
-### Cambiar nombre de empresa
+---
 
-Buscar y reemplazar en `index.html`:
-- `Usagitech` → Tu nombre de empresa
-- `usagitech.com` → Tu dominio
-- Actualizar meta tags (title, description, og:*)
+## Estructura del Proyecto
 
-### Cambiar colores
+```
+usagitech-site/
+├── public/                     # Assets estaticos
+│   └── logo.png               # Logo de la empresa
+│
+├── src/                        # Codigo fuente
+│   ├── main.js                # Entry point
+│   ├── app.js                 # Orquestador de modulos
+│   ├── style.css              # Estilos globales (1768 lineas)
+│   │
+│   ├── contactForm/           # Formulario de contacto
+│   ├── faqAccordion/          # Acordeon FAQ
+│   ├── handleBrowserBackForward/ # Navegacion del browser
+│   ├── headerMobile/          # Menu hamburguesa
+│   ├── headerScrollEffect/    # Efecto header al scroll
+│   ├── initialPageLoad/       # Carga inicial
+│   ├── keyboardNavegation/    # Accesibilidad teclado
+│   ├── modal/                 # Sistema de modales
+│   ├── scrollAnimations/      # Animaciones al scroll
+│   ├── scrollNavegation/      # Navegacion suave
+│   ├── sectionDetection/      # Deteccion seccion activa
+│   └── statsCounter/          # Contador animado
+│
+├── index.html                  # Pagina principal
+├── package.json               # Configuracion npm
+├── CLAUDE.md                  # Contexto para Claude AI
+└── README.md                  # Este archivo
+```
 
-En `css/styles.css`, modificar variables CSS:
+---
+
+## Variables CSS
+
+### Colores
 
 ```css
 :root {
-    --color-primary: #10b981;        /* Verde principal */
-    --color-accent: #06b6d4;         /* Cyan de acento */
-    --color-bg: #0a0a0b;             /* Fondo oscuro */
-    /* ... más variables */
+    /* Fondos */
+    --color-bg: #0a0a0b;              /* Fondo principal */
+    --color-bg-secondary: #111113;    /* Fondo secundario */
+    --color-surface: #1c1c1f;         /* Superficies (cards) */
+
+    /* Bordes */
+    --color-border: #27272a;          /* Borde normal */
+    --color-border-light: #3f3f46;    /* Borde hover */
+
+    /* Texto */
+    --color-text: #fafafa;            /* Texto principal */
+    --color-text-secondary: #a1a1aa;  /* Texto secundario */
+    --color-text-muted: #71717a;      /* Texto apagado */
+
+    /* Marca */
+    --color-primary: #10b981;         /* Verde principal */
+    --color-primary-hover: #059669;   /* Verde hover */
+    --color-accent: #06b6d4;          /* Cyan de acento */
+
+    /* Estados */
+    --color-success: #22c55e;         /* Exito */
+    --color-warning: #f59e0b;         /* Advertencia */
+    --color-error: #ef4444;           /* Error */
 }
 ```
 
-### Cambiar fundadores
+### Espaciado
 
-En `index.html`, buscar la sección `.about__founders` y modificar:
-- Iniciales en `.founder-card__avatar`
-- Nombres, roles y bios
+```css
+:root {
+    --space-xs: 0.25rem;    /* 4px */
+    --space-sm: 0.5rem;     /* 8px */
+    --space-md: 1rem;       /* 16px */
+    --space-lg: 1.5rem;     /* 24px */
+    --space-xl: 2rem;       /* 32px */
+    --space-2xl: 3rem;      /* 48px */
+    --space-3xl: 4rem;      /* 64px */
+    --space-4xl: 6rem;      /* 96px */
+}
+```
 
-### Agregar/modificar servicios
+### Tipografia
 
-1. En la sección `#servicios`, duplicar o modificar `.service-card`
-2. Crear/modificar modal correspondiente `#modal-[servicio]`
+```css
+:root {
+    --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+```
 
-### Configurar formulario de contacto
+### Layout
 
-El formulario actual simula el envío. Para producción:
+```css
+:root {
+    --container-max: 1200px;
+    --container-padding: 1.5rem;
+    --header-height: 72px;
+}
+```
 
-**Opción A: Formspree (fácil)**
+### Transiciones
+
+```css
+:root {
+    --transition-fast: 150ms ease;
+    --transition-base: 250ms ease;
+    --transition-slow: 350ms ease;
+}
+```
+
+### Border Radius
+
+```css
+:root {
+    --radius-sm: 0.375rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 0.75rem;
+    --radius-xl: 1rem;
+    --radius-full: 9999px;
+}
+```
+
+---
+
+## Modulos JavaScript
+
+### Arquitectura
+
+Cada modulo exporta una funcion de inicializacion que se ejecuta al cargar el DOM:
+
+```javascript
+// src/moduleName/index.js
+export default function initModuleName() {
+    // Logica del modulo
+}
+
+// src/app.js
+import initModuleName from './moduleName';
+export default function app() {
+    initModuleName();
+}
+```
+
+### Lista de Modulos
+
+| Modulo | Archivo | Descripcion |
+|--------|---------|-------------|
+| **contactForm** | `src/contactForm/index.js` | Validacion y envio del formulario |
+| **faqAccordion** | `src/faqAccordion/index.js` | Acordeon de preguntas frecuentes |
+| **handleBrowserBackForward** | `src/handleBrowserBackForward/index.js` | Manejo de botones atras/adelante |
+| **headerMobile** | `src/headerMobile/index.js` | Menu hamburguesa responsive |
+| **headerScrollEffect** | `src/headerScrollEffect/index.js` | Efecto del header al scroll |
+| **initialPageLoad** | `src/initialPageLoad/index.js` | Navegacion inicial por hash |
+| **keyboardNavegation** | `src/keyboardNavegation/index.js` | Escape para cerrar modales |
+| **modal** | `src/modal/index.js` | Sistema de modales |
+| **scrollAnimations** | `src/scrollAnimations/index.js` | Animaciones con IntersectionObserver |
+| **scrollNavegation** | `src/scrollNavegation/index.js` | Scroll suave entre secciones |
+| **sectionDetection** | `src/sectionDetection/index.js` | Deteccion de seccion activa |
+| **statsCounter** | `src/statsCounter/index.js` | Animacion de contadores |
+
+---
+
+## Secciones del Sitio
+
+| Seccion | ID | Descripcion |
+|---------|-----|-------------|
+| Hero | `#inicio` | Banner principal con CTAs |
+| Value Props | - | 3 propuestas de valor |
+| Servicios | `#servicios` | 5 servicios con modales |
+| Stats | - | 4 metricas animadas |
+| Tech Stack | - | Tecnologias por categoria |
+| Nosotros | `#nosotros` | Historia y fundadores |
+| Proceso | `#proceso` | Timeline de 4 fases |
+| Casos de Exito | `#casos` | 3 case studies |
+| CTA | - | Llamada a la accion |
+| Contacto | `#contacto` | Formulario y datos |
+| FAQ | - | 4 preguntas frecuentes |
+| Footer | - | Links y copyright |
+
+---
+
+## Personalizacion
+
+### Cambiar Colores
+
+Editar variables en `src/style.css`:
+
+```css
+:root {
+    --color-primary: #TU_COLOR;
+    --color-accent: #TU_ACENTO;
+}
+```
+
+### Cambiar Nombre de Empresa
+
+Buscar y reemplazar en `index.html`:
+- `Usagitech` -> Tu empresa
+- `usagitech.com` -> Tu dominio
+- Actualizar meta tags
+
+### Cambiar Fundadores
+
+En `index.html`, seccion `.about__founders`:
+
+```html
+<div class="founder-card">
+    <div class="founder-card__avatar">
+        <span>XX</span>  <!-- Iniciales -->
+    </div>
+    <div class="founder-card__info">
+        <h4>Nombre</h4>
+        <span>Rol</span>
+        <p>Bio...</p>
+    </div>
+</div>
+```
+
+### Agregar Servicios
+
+1. Agregar `.service-card` en seccion `#servicios`
+2. Crear modal `#modal-nombre` al final del body
+3. Agregar `data-modal="nombre"` al boton
+
+### Conectar Formulario
+
+**Formspree:**
 ```html
 <form action="https://formspree.io/f/TU_ID" method="POST">
 ```
 
-**Opción B: Lambda + SES (tu stack)**
+**API propia:**
 ```javascript
-// En app.js, descomentar y modificar el fetch
-const response = await fetch('https://tu-api.com/contact', {
+// En src/contactForm/index.js
+const response = await fetch('TU_API', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(data)
 });
 ```
 
-### Agregar Analytics
+---
 
-Antes de `</head>` en `index.html`:
+## Responsive Design
 
-```html
-<!-- Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXX"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-XXXXXXXX');
-</script>
+| Breakpoint | Dispositivo |
+|------------|-------------|
+| 1024px+ | Desktop |
+| 768px - 1024px | Tablet |
+| < 768px | Mobile |
+| < 480px | Mobile pequeno |
+
+---
+
+## Deployment
+
+### GitHub Pages
+
+```bash
+npm run build
+# Push carpeta dist/ a rama gh-pages
 ```
 
-## 📱 Responsive
+### Vercel / Netlify
 
-El sitio es completamente responsive:
-- Desktop: 1024px+
-- Tablet: 768px - 1024px
-- Mobile: < 768px
+1. Conectar repositorio
+2. Build command: `npm run build`
+3. Output: `dist`
 
-## 🔧 Tecnologías
+### AWS S3
 
-- HTML5 semántico
-- CSS3 (variables, flexbox, grid, animations)
-- JavaScript ES6+ (vanilla)
-- Fonts: Plus Jakarta Sans, JetBrains Mono (Google Fonts)
-- Icons: SVG inline
+```bash
+npm run build
+aws s3 sync dist/ s3://tu-bucket
+```
 
-## 📝 SEO
+---
 
-Ya incluido:
-- Meta tags (title, description, keywords)
-- Open Graph tags
-- Estructura de headings correcta (H1 > H2 > H3)
-- URLs semánticas (navegación por hash)
-- HTML semántico
+## SEO
 
-Para mejorar:
-- Agregar sitemap.xml
-- Agregar robots.txt
-- Configurar Google Search Console
-- Agregar schema.org markup (ya parcialmente incluido)
+### Meta Tags Incluidos
 
-## 🎨 Secciones
+- `title`, `description`, `keywords`
+- Open Graph (og:title, og:description, og:type, og:url)
+- Favicon
 
-1. **Hero** - Headline principal + código animado
-2. **Value Props** - 3 propuestas de valor
-3. **Servicios** - 5 servicios con modales de detalle
-4. **Stats** - Métricas animadas
-5. **Tech Stack** - Tecnologías organizadas por categoría
-6. **Nosotros** - Historia + fundadores
-7. **Proceso** - Timeline de 4 fases
-8. **Casos de Éxito** - 3 casos con métricas
-9. **CTA** - Llamada a la acción
-10. **Contacto** - Formulario + datos
-11. **FAQ** - Preguntas frecuentes (acordeón)
-12. **Footer** - Links + copyright
+### Mejoras Pendientes
 
-## 📄 Licencia
+- [ ] sitemap.xml
+- [ ] robots.txt
+- [ ] Schema.org markup
+- [ ] og:image
+
+---
+
+## Accesibilidad
+
+- Navegacion por teclado
+- Tab trap en modales
+- Escape cierra modales/menu
+- Estructura de headings correcta
+- HTML semantico
+
+---
+
+## Performance
+
+- Vanilla JS (0 dependencias runtime)
+- Intersection Observer (lazy animations)
+- requestAnimationFrame throttling
+- SVG inline
+- CSS variables
+
+---
+
+## Licencia
 
 Libre para uso comercial. Personalizar y usar como quieras.
 

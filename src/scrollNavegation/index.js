@@ -3,6 +3,7 @@
 // ============================================
 
 import { updateActiveNavLink } from "../sectionDetection";
+import modalController from "../modal";
 
 const header = document.getElementById('header');
 
@@ -45,7 +46,7 @@ export default function initScrollNavegation(){
                 history.pushState(null, null, `#${navTarget}`);
                 
                 // Close modal if open
-                closeAllModals();
+                modalController.closeAllModals();
             }
         });
     });
