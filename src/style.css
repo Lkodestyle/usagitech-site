@@ -362,6 +362,50 @@ h1, h2, h3, h4, h5, h6 {
     overflow: hidden;
 }
 
+/* Contenedor de las luces */
+.hero__bg::before {
+    content: "";
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
+    border-radius: 50%;
+    top: -10%;
+    left: -10%;
+    z-index: -1;
+    filter: blur(80px);
+    animation: moveLight 15s infinite alternate ease-in-out;
+}
+
+/* Una segunda luz de otro color para dar profundidad */
+.hero__bg::after {
+    content: "";
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(168, 85, 247, 0.1) 0%, transparent 70%);
+    border-radius: 50%;
+    bottom: -10%;
+    right: -10%;
+    z-index: -1;
+    filter: blur(100px);
+    animation: moveLight 20s infinite alternate-reverse ease-in-out;
+}
+
+/* Animación de movimiento orgánico */
+@keyframes moveLight {
+    0% {
+        transform: translate(0, 0);
+    }
+    50% {
+        transform: translate(50vw, 20vh);
+    }
+    100% {
+        transform: translate(20vw, 50vh);
+    }
+}
+
+
 .hero__grid {
     position: absolute;
     inset: 0;
@@ -371,6 +415,67 @@ h1, h2, h3, h4, h5, h6 {
     background-size: 60px 60px;
     mask-image: radial-gradient(ellipse 80% 50% at 50% 0%, black 70%, transparent 100%);
     -webkit-mask-image: radial-gradient(ellipse 80% 50% at 50% 0%, black 70%, transparent 100%);
+}
+/* Contenedor para los cometas dentro de hero__bg */
+.hero__grid::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: 
+        linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.4), transparent);
+    width: 150px; /* Largo del cometa */
+    height: 1px;   /* Grosor del cometa */
+    top: 20%;      /* Posición inicial vertical */
+    left: -150px;  /* Empieza fuera de la pantalla */
+    filter: blur(1px);
+    box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+    animation: comet 4s linear infinite;
+}
+
+/* Animación del movimiento */
+@keyframes comet {
+    0% {
+        transform: translateX(0) scaleX(1);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(120vw) scaleX(1.5);
+        opacity: 0;
+    }
+}
+
+/* Creamos una capa para los efectos de líneas */
+.hero__comets {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.comet {
+    position: absolute;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--color-accent), transparent);
+    opacity: 0;
+    animation: comet-run 4s infinite ease-in;
+}
+
+/* Posiciones y retrasos diferentes para cada uno */
+.comet--1 { top: 30%; width: 200px; animation-delay: 0s; }
+.comet--2 { top: 60%; width: 150px; animation-delay: 2s; }
+.comet--3 { top: 85%; width: 250px; animation-delay: 4s; }
+
+@keyframes comet-run {
+    0% { left: -20%; opacity: 0; transform: scaleX(0.5); }
+    10% { opacity: 0.7; }
+    50% { opacity: 1; }
+    100% { left: 120%; opacity: 0; transform: scaleX(2); }
 }
 
 .hero__container {
