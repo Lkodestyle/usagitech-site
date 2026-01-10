@@ -43,8 +43,9 @@ describe('contactForm validations', () => {
     expect(validateEmail('')).toBe('Por favor, ingresá tu email.')
     expect(validateEmail('invalido')).toBe('Email inválido.')
 
-    const tooLongLocal = 'a'.repeat(245)
-    const tooLongEmail = `${tooLongLocal}@x.com` // > 254 chars
+    // Construimos un email con longitud total > 254 caracteres
+    const tooLongLocal = 'a'.repeat(249) // 249 + 6 ('@x.com') = 255
+    const tooLongEmail = `${tooLongLocal}@x.com`
     expect(validateEmail(tooLongEmail)).toBe('Email: longitud máxima de 254 caracteres.')
 
     expect(validateEmail('test@example.com')).toBe('')
