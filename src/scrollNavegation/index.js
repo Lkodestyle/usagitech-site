@@ -2,6 +2,7 @@
 // Smooth Scroll Navigation
 // ============================================
 
+import { updateActiveNavLink } from "../sectionDetection";
 
 const header = document.getElementById('header');
 
