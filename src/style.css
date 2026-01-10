@@ -1330,6 +1330,12 @@ h1, h2, h3, h4, h5, h6 {
 .footer__brand .logo {
     margin-bottom: var(--space-md);
 }
+.footer__brand {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 
 .footer__desc {
     font-size: 0.95rem;
@@ -1345,6 +1351,10 @@ h1, h2, h3, h4, h5, h6 {
     letter-spacing: 0.05em;
     color: var(--color-text);
     margin-bottom: var(--space-md);
+}
+
+.footer__links{
+    text-align: center;
 }
 
 .footer__links ul {
