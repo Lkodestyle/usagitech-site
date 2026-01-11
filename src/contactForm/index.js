@@ -137,12 +137,6 @@ export default function initContactForm(){
 
             // Basic validation
             
-            /*
-            type Request struct {
-
-            }
-            */
-            
             const nameError = validateName(data.name);
             if (nameError) {
                 showToast('warning', nameError);
