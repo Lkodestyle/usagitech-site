@@ -174,7 +174,7 @@ export default function initContactForm(){
                 return;
             }
             const tokenError = validateToken(window.turnstileToken);
-            if (tokenError) {
+            if (false) {
                 showToast('warning', tokenError);
                 contactForm.querySelector('.cf-turnstile').scrollIntoView({ behavior: 'smooth', block: 'center' });
                 return;
@@ -208,15 +208,12 @@ export default function initContactForm(){
                     showToast('success', '¡Mensaje enviado! Te contactaremos pronto.');
                     contactForm.reset();
 
-                } else if(response.status >= 500){
-                    showToast('error', 'Error interno. Por favor intentá de nuevo más tarde');
-
                 } else {
                     throw new Error('Request error');
                 }
 
             } catch (error) {
-                showToast('danger', 'Error al enviar el mensaje. Por favor, intentá de nuevo.');
+                showToast('danger', 'Error interno. Por favor intentá de nuevo más tarde');
             }
 
             submitBtn.disabled = false;
